@@ -1,0 +1,19 @@
+{
+  "contacts": [
+    {
+      "id": "daf9a38d-d5e6-4eef-b814-e1867a1e6649",
+      "name": "jon",
+      "email": "jon@ymail.com"
+    },
+    {
+      "id": "32dd7f8c-a65e-42d8-ba64-fc9937ab6e2d",
+      "name": "sam",
+      "email": "sam@ymail.com"
+    },
+    {
+      "id": "ae98d465-c0c2-4220-8683-cd220a7d2abc",
+      "name": "bryan",
+      "email": "bryan@gmail.com"
+    }
+  ]
+}
