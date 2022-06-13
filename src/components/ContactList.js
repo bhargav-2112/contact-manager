@@ -1,24 +1,25 @@
-import React,{useRef} from 'react'
+import React,{useRef, useEffect, useState} from 'react'
 import ContactCard from './ContactCard'
 import {Link} from 'react-router-dom';
+import { useContactsCrud } from '../context/ContactsCrudContext';
 
 function ContactList(props) {
-    const inputElement = useRef("");
-    const deleteContactHandler = (id) => {
-        props.getContactId(id);
-    };
-    const renderContactList = props.contacts.map((contact) => {
+    const {contacts, retrieveContacts, searchHandler, text, searchResults} = useContactsCrud();
+    useEffect(() => {
+      retrieveContacts();
+    }, []);
+    
+    const renderContactList = (text.length < 1 ? contacts : searchResults).map((contact) => {
       return (
         <ContactCard
           contact={contact}
-          clickHandler={deleteContactHandler}
           key={contact.id}
         />
       );
     });
 
-    const getSearchTerm = (event) => {
-        props.searchKeyword(inputElement.current.value);
+    const onUserSearch = (e) => {
+      searchHandler(e.target.value);
     }
 
     return (
@@ -29,15 +30,23 @@ function ContactList(props) {
             <button className="ui button blue right">Add Contact</button>
           </Link>
         </h2>
-        <div  className='ui search'>
-          <div className='ui icon input'>
-            <input 
-            ref={inputElement}
-            type="text" placeholder='Search Contacts' className='prompt' value={props.term} onChange={getSearchTerm}/>
-            <i className='search icon'></i>
+        <div className="ui search">
+          <div className="ui icon input">
+            <input
+              type="text"
+              placeholder="Search Contacts"
+              className="prompt"
+              value={text}
+              onChange={(e) => onUserSearch(e)}
+            />
+            <i className="search icon"></i>
           </div>
         </div>
-        <div className="ui celled list">{renderContactList.length>0 ? renderContactList : "No contacts available"}</div>
+        <div className="ui celled list">
+          {renderContactList.length > 0
+            ? renderContactList
+            : "No contacts available"}
+        </div>
       </div>
     );
 }
