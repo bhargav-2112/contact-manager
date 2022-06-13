@@ -2,11 +2,8 @@ import './App.css';
 import Header from './Header';
 import AddContact from './AddContact';
 import ContactList from './ContactList';
-import { useState, useEffect } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import ContactDetails from './ContactDetails';
-import api from '../api/contacts';
 import EditContact from './EditContact';
 import { ContactsCrudContextProvider } from "../context/ContactsCrudContext";
 
