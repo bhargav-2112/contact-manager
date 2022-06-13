@@ -3,7 +3,7 @@ import user from '../images/user.png';
 import {Link} from 'react-router-dom';
 
 function ContactCard(props) {  
-    console.log("props.contact",props.contact); 
+
     const {name, email, id} = props.contact;  // destructuring
   return (
     <div className="card" key={id}> {/* key is used to identify each card */}

@@ -8,6 +8,7 @@ import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import ContactDetails from './ContactDetails';
 import api from '../api/contacts';
 import EditContact from './EditContact';
+import { ContactsCrudContextProvider } from "../context/ContactsCrudContext";
 
 function App() {
   const LOCAL_STORAGE_KEY = 'contacts';
@@ -38,28 +39,15 @@ function App() {
   };
 
   const addContactHandler = async(contact) => {
-    console.log("contact",contact);
     // setContacts([...contacts, {id: uuidv4(), ...contact}])
     const request = {
       id: uuidv4(), ...contact
     }
 
     const response = await api.post("/contacts", request);
-    console.log(response);
     setContacts([...contacts, response.data]);
     
   }
-
-  const updateContactHandler = async(contact) => {
-    console.log("contact",contact);
-    const response = await api.put(`/contacts/${contact.id}`, contact);
-    const {id, name, email} = response.data;
-    setContacts(
-      contacts.map((contact) => {
-        return contact.id === id ? { ...response.data } : contact;
-      })
-    );
-  };
 
   const removeContactHandler =  async(id) => {
     await api.delete(`/contacts/${id}`); 
@@ -100,16 +88,18 @@ function App() {
     <div className='ui container'>
       <Router>
         <Header />
+        <ContactsCrudContextProvider>
         <Routes>
         <Route path='/' element={<ContactList 
         contacts={searchTerm.length < 1 ? contacts : searchResults} 
         getContactId={removeContactHandler} 
         term={searchTerm}
         searchKeyword={searchHandler}/>} exact/>
-        <Route path='/add' element={<AddContact addContactHandler={addContactHandler}/>} exact/>
-        <Route path='/edit' element={<EditContact updateContactHandler={updateContactHandler} />} exact/>
+        <Route path='/add' element={<AddContact/>} exact/>
+        <Route path='/edit' element={<EditContact/>} exact/>
         <Route path='/contact/:id' element={<ContactDetails/>} exact/>
         </Routes>
+        </ContactsCrudContextProvider>
       </Router>
     </div>
   );
