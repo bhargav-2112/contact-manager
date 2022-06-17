@@ -39,6 +39,25 @@
       "id": "3e0fcf86-6313-4a39-907d-1127fa6791eb",
       "name": "tom",
       "email": "tom@yopmail.com"
+    },
+    {
+      "id": "7960667f-04a7-447e-ad89-bf4ac905d33d",
+      "name": "nick",
+      "email": "nick@gmail.com"
+    },
+    {
+      "id": "d499f168-77ad-4cb6-bdf3-ef48cec89d04",
+      "username": "test",
+      "email": "jon@ymail.com",
+      "password": "jon123",
+      "city": "surat",
+      "country": "India",
+      "phone": "9725804666"
+    },
+    {
+      "id": "866a85d1-bc25-4a76-aa98-004737a22268",
+      "name": "scott",
+      "email": "michael@gmail.com"
     }
   ]
 }
